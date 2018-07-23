@@ -42,6 +42,7 @@ group :development, :test do
 
   gem 'dotenv-rails', '~> 2.5'
   gem 'rspec-rails', '~> 3.7'
+  gem 'rspec_junit_formatter', '~> 0.4.1'
 end
 
 group :development do
