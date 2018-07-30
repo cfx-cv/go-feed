@@ -7,16 +7,16 @@ RSpec.describe Order, type: :model do
     let(:driver) { Driver.new }
     let(:order) { Order.new(restaurant: restaurant, customer: customer, driver: driver) }
 
-    it "should have attribute customer_id" do
-      expect(order).to respond_to(:customer_id)
+    it "should have attribute customer" do
+      expect(order).to respond_to(:customer)
     end
 
-    it "should have attribute driver_id" do
-      expect(order).to respond_to(:driver_id)
+    it "should have attribute driver" do
+      expect(order).to respond_to(:driver)
     end
 
-    it "should have attribute restaurant_id" do
-      expect(order).to respond_to(:restaurant_id)
+    it "should have attribute restaurant" do
+      expect(order).to respond_to(:restaurant)
     end
   end
 end
