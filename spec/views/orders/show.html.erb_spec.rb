@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "orders/show", type: :view do
   before(:each) do
     @order = assign(:order, Order.create!(
-      :restaurant => nil,
-      :customer => nil,
-      :driver => nil
+      :restaurant => Restaurant.new,
+      :customer => Customer.new,
+      :driver => Driver.new
     ))
   end
 
