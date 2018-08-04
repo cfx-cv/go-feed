@@ -24,10 +24,11 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params.slice(:restaurant_id, :customer_id, :driver_id))
+    create_order_menus if saved = @order.save
 
     respond_to do |format|
-      if @order.save
+      if saved
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -35,6 +36,12 @@ class OrdersController < ApplicationController
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def create_order_menus
+      order_params[:menus].each do |menu_id, quantity|
+        OrderMenu.create(order_id: @order.id, menu_id: menu_id, quantity: quantity)
+      end
   end
 
   # PATCH/PUT /orders/1
@@ -69,6 +76,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:restaurant_id, :customer_id, :driver_id)
+      params.require(:order).permit(:restaurant_id, :customer_id, :driver_id, menus: {})
     end
 end
