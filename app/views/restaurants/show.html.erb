@@ -20,5 +20,13 @@
   <%= @restaurant.phone %>
 </p>
 
+<%= form_with(model: order) do |form| %>
+  <% @restaurant.menus.each do |menu| %>
+    <label><%= menu.name %>: </label>
+    <input type="number" name="order[<%= menu.id %>][quantity]" value=0 />
+  <% end %>
+  <input type="submit" value="Submit order" />
+<% end %>
+
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>
