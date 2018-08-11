@@ -17,16 +17,10 @@ class OrdersController < ApplicationController
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
-        format.html { render :new }
+        format.html { redirect_to Restaurant.find(order_params[:restaurant_id]) }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def create_order_menus
-      order_params[:menus].each do |menu_id, quantity|
-        OrderMenu.create(order_id: @order.id, menu_id: menu_id, quantity: quantity)
-      end
   end
 
   def update
@@ -56,5 +50,11 @@ class OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(:restaurant_id, :customer_id, :driver_id, menus: {})
+    end
+
+    def create_order_menus
+      order_params[:menus].each do |menu_id, quantity|
+        OrderMenu.create(order_id: @order.id, menu_id: menu_id, quantity: quantity)
+      end
     end
 end
