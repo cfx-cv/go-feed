@@ -1,5 +1,6 @@
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
     @restaurant = Restaurant.find(params[:restaurant_id])
@@ -11,7 +12,7 @@ class MenusController < ApplicationController
 
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
-    @menu = Menu.new(restaurant: @restaurant)
+    @menu = Menu.new
   end
 
   def edit
@@ -54,6 +55,10 @@ class MenusController < ApplicationController
   private
     def set_menu
       @menu = Menu.find(params[:id])
+    end
+
+    def set_restaurant
+      @restaurant = Restaurant.find(params[:restaurant_id])
     end
 
     def menu_params
