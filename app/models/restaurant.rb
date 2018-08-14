@@ -8,8 +8,10 @@ class Restaurant < ApplicationRecord
   belongs_to :position
 
   def fetch_map
-    position = self.position
-    resp = HTTP.get("http://suez_app/staticmap?origin=#{position.latitude},#{position.longitude}")
+    params = { origin: "#{self.position.latitude},#{self.position.longitude}" }
+    url = "#{ENV["GATEWAY_URL"]}/staticmap?#{params.to_query}"
+
+    resp = HTTP.get(url)
     json = JSON.parse(resp.to_s)
     json["staticmap"]
   end
