@@ -2,13 +2,24 @@ require "rails_helper"
 
 RSpec.describe Restaurant, type: :model do
   describe "initialization" do
-    let(:restaurant) { Restaurant.new(name: "Warunk Nasgor", address: "Test address", description: "Test description", phone: "0808080808") }
+    let(:position) { Position.new(latitude: 37.774929, longitude: -122.419418) }
+
+    let(:restaurant) {
+      Restaurant.new(
+        name: "Warunk Nasgor",
+        address: "Test address",
+        description: "Test description",
+        phone: "0808080808",
+        position: position
+      )
+    }
 
     it "initializes Restaurant given attributes" do
       expect(restaurant.name).to eq("Warunk Nasgor")
       expect(restaurant.address).to eq("Test address")
       expect(restaurant.description).to eq("Test description")
       expect(restaurant.phone).to eq("0808080808")
+      expect(restaurant.position).to eq(position)
     end
   end
 
@@ -29,6 +40,10 @@ RSpec.describe Restaurant, type: :model do
 
     it "should have attribute phone" do
       expect(restaurant).to respond_to(:phone)
+    end
+
+    it "should have attribute phone" do
+      expect(restaurant).to respond_to(:position)
     end
   end
 
