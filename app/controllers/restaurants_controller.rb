@@ -6,6 +6,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    @staticmap = @restaurant.fetch_map
   end
 
   def new
