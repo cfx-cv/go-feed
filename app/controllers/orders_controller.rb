@@ -24,12 +24,15 @@ class OrdersController < ApplicationController
   end
 
   def update
+    updated = @order.update(order_params.slice(:restaurant_id, :customer_id, :driver_id))
+    @order.update_status if updated && order_params[:update_status]
+
     respond_to do |format|
-      if @order.update(order_params)
+      if updated
         format.html { redirect_to @order, notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @order }
       else
-        format.html { render :edit }
+        format.html { render :show }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
@@ -49,7 +52,7 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:restaurant_id, :customer_id, :driver_id, menus: {})
+      params.require(:order).permit(:restaurant_id, :customer_id, :driver_id, :update_status, menus: {})
     end
 
     def create_order_menus

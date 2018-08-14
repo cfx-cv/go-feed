@@ -15,4 +15,13 @@
   <%= @order.driver %>
 </p>
 
+<%= form_with(model: @order, local: true, method: 'patch') do |form| %>
+  <%= form.hidden_field :driver_id, value: 1 %> <!-- TODO -->
+  <%= form.hidden_field :update_status, value: true %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
 <%= link_to 'Back', orders_path %>
