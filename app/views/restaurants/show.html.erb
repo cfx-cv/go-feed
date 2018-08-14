@@ -20,17 +20,7 @@
   <%= @restaurant.phone %>
 </p>
 
-<form action="<%= orders_path %>" method="POST">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-  <input type="hidden" name="order[restaurant_id]" value="<%= @restaurant.id %>" />
-  <input type="hidden" name="order[customer_id]" value="1" />
-  <input type="hidden" name="order[driver_id]" value="1" />
-  <% @restaurant.menus.each do |menu| %>
-    <label><%= menu.name %>: </label>
-    <input type="number" name="order[menus][<%= menu.id %>]" value=0 />
-  <% end %>
-  <input type="submit" value="Submit order" />
-</form>
+<%= render partial: 'orders/form', locals: { order: Order.new, restaurant: @restaurant } %>
 
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>

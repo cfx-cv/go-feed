@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :update, :destroy]
 
   def index
     @orders = Order.all
@@ -8,38 +8,25 @@ class OrdersController < ApplicationController
   def show
   end
 
-  def new
-    @order = Order.new
-  end
-
-  def edit
-  end
-
   def create
     @order = Order.new(order_params.slice(:restaurant_id, :customer_id, :driver_id))
     create_order_menus if saved = @order.save
 
     respond_to do |format|
       if saved
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to @order, notice: "Order was successfully created." }
         format.json { render :show, status: :created, location: @order }
       else
-        format.html { render :new }
+        format.html { redirect_to Restaurant.find(order_params[:restaurant_id]) }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def create_order_menus
-      order_params[:menus].each do |menu_id, quantity|
-        OrderMenu.create(order_id: @order.id, menu_id: menu_id, quantity: quantity)
-      end
-  end
-
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -51,7 +38,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,5 +50,11 @@ class OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(:restaurant_id, :customer_id, :driver_id, menus: {})
+    end
+
+    def create_order_menus
+      order_params[:menus].each do |menu_id, quantity|
+        OrderMenu.create(order_id: @order.id, menu_id: menu_id, quantity: quantity)
+      end
     end
 end

@@ -1,14 +1,17 @@
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
-    @menus = Menu.all
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @menus = Menu.where(restaurant: @restaurant)
   end
 
   def show
   end
 
   def new
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @menu = Menu.new
   end
 
@@ -20,7 +23,7 @@ class MenusController < ApplicationController
 
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
+        format.html { redirect_to @menu, notice: "Menu was successfully created." }
         format.json { render :show, status: :created, location: @menu }
       else
         format.html { render :new }
@@ -32,7 +35,7 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if @menu.update(menu_params)
-        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
+        format.html { redirect_to @menu, notice: "Menu was successfully updated." }
         format.json { render :show, status: :ok, location: @menu }
       else
         format.html { render :edit }
@@ -44,7 +47,7 @@ class MenusController < ApplicationController
   def destroy
     @menu.destroy
     respond_to do |format|
-      format.html { redirect_to menus_url, notice: 'Menu was successfully destroyed.' }
+      format.html { redirect_to menus_url, notice: "Menu was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -54,7 +57,11 @@ class MenusController < ApplicationController
       @menu = Menu.find(params[:id])
     end
 
+    def set_restaurant
+      @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+
     def menu_params
-      params.fetch(:menu, {})
+      params.require(:menu).permit(:name, :price, :restaurant_id)
     end
 end
