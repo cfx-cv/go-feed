@@ -9,7 +9,7 @@ class MenusController < ApplicationController
   end
 
   def new
-    @menu = Menu.new
+    @menu = Menu.new(restaurant_id: params[:restaurant_id])
   end
 
   def edit
@@ -55,6 +55,6 @@ class MenusController < ApplicationController
     end
 
     def menu_params
-      params.fetch(:menu, {})
+      params.require(:menu).permit(:name, :price, :restaurant_id)
     end
 end
