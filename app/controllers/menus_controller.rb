@@ -2,7 +2,7 @@ class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
   def index
-    @menus = Menu.where("restaurant_id = ?", params[:restaurant_id])
+    @menus = Menu.where(restaurant_id: params[:restaurant_id])
   end
 
   def show
