@@ -70,7 +70,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-        defaults = {type: 'Customer' }
-        params.require(:user).permit(:username, :email, :password, :password_confirmation).reverse_merge(defaults)
+        #defaults = {type: 'Customer' }
+        params.require(:user).permit(:username, :email, :user_type,:password, :password_confirmation)#.reverse_merge(defaults)
     end
 end

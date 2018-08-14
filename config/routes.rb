@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :menus, :drivers
 
     resources :users
+    
     get "/register", to: "users#new"
 
     resource :user_sessions, only: [:new, :create, :destroy]

@@ -18,6 +18,9 @@
         <%= f.text_field :email %>
     </div>
     <div class="field">
+        <%= f.hidden_field :user_type, value: 'Customer'%>
+    </div>
+    <div class="field">
         <%= f.label :password %>
         <%= f.password_field :password %>
     </div>

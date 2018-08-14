@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_02_090841) do
+ActiveRecord::Schema.define(version: 2018_08_14_062554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "customers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "drivers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "menus", force: :cascade do |t|
     t.string "name"
@@ -39,18 +29,18 @@ ActiveRecord::Schema.define(version: 2018_08_02_090841) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "order_id"
     t.index ["menu_id"], name: "index_order_menus_on_menu_id"
+    t.index ["order_id"], name: "index_order_menus_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.bigint "restaurant_id"
-    t.bigint "customer_id"
-    t.bigint "driver_id"
+    t.string "customer_id"
+    t.string "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["driver_id"], name: "index_orders_on_driver_id"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
   end
 
@@ -63,9 +53,27 @@ ActiveRecord::Schema.define(version: 2018_08_02_090841) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "crypted_password"
+    t.string "password_salt"
+    t.string "persistence_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "user_type"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["persistence_token"], name: "index_users_on_persistence_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
   add_foreign_key "menus", "restaurants"
   add_foreign_key "order_menus", "menus"
-  add_foreign_key "orders", "customers"
-  add_foreign_key "orders", "drivers"
+  add_foreign_key "order_menus", "orders"
   add_foreign_key "orders", "restaurants"
 end
