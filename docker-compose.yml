@@ -10,6 +10,9 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    networks:
+      default:
+      gofeed:
 
   db:
     image: postgres:10.5
@@ -21,3 +24,7 @@ services:
 
 volumes:
   postgres_volume:
+
+networks:
+  gofeed:
+    external: true
