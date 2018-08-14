@@ -1,2 +1,2 @@
-class Driver < ApplicationRecord
+class Driver < User
 end

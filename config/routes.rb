@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
-  resources :menus
-  resources :orders
-  resources :restaurants
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # get '/app', to: 'app#index'
+  scope '/app' do
+    resources :restaurants do
+      resources :menus
+    end
+
+    resources :orders, only: [:index, :show, :create, :update, :destroy]
+
+    resources :menus, :drivers
+
+    resources :users
+    get "/register", to: "users#new"
+
+    resource :user_sessions, only: [:new, :create, :destroy]
+    get "/login", to: "user_sessions#new"
+    delete "/logout", to: "user_sessions#destroy"
+  end
 end

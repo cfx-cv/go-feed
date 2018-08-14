@@ -12,6 +12,8 @@
   <tbody>
     <% @menus.each do |menu| %>
       <tr>
+        <td><%= menu.name %></td>
+        <td><%= menu.price %></td>
         <td><%= link_to 'Show', menu %></td>
         <td><%= link_to 'Edit', edit_menu_path(menu) %></td>
         <td><%= link_to 'Destroy', menu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
