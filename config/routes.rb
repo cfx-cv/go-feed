@@ -6,13 +6,12 @@ Rails.application.routes.draw do
   get "/login", to: "user_sessions#new"
   delete "/logout", to: "user_sessions#destroy"
 
-  # get "/app", to: "app#index"
-
   scope "/app" do
     resources :restaurants do
-      resources :menus, shallow: true # https://guides.rubyonrails.org/routing.html#shallow-nesting
+      resources :menus, shallow: true
     end
 
     resources :orders, only: [:index, :show, :create, :update, :destroy]
   end
+  get "/app", to: "app#index"
 end
