@@ -18,7 +18,7 @@ RSpec.describe Menu, type: :model do
     end
 
     it "should have attribute price" do
-      expect(menu).to respond_to(:name)
+      expect(menu).to respond_to(:price)
     end
   end
 

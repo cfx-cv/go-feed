@@ -3,11 +3,11 @@ require "rails_helper"
 RSpec.describe MenusController, type: :routing do
   describe "routing" do
     it "routes to #index" do
-      expect(get: "app/menus").to route_to("menus#index")
+      expect(get: "app/restaurants/1/menus").to route_to("menus#index", restaurant_id: "1")
     end
 
     it "routes to #new" do
-      expect(get: "app/menus/new").to route_to("menus#new")
+      expect(get: "app/restaurants/1/menus/new").to route_to("menus#new", restaurant_id: "1")
     end
 
     it "routes to #show" do
@@ -19,7 +19,7 @@ RSpec.describe MenusController, type: :routing do
     end
 
     it "routes to #create" do
-      expect(post: "app/menus").to route_to("menus#create")
+      expect(post: "app/restaurants/1/menus").to route_to("menus#create", restaurant_id: "1")
     end
 
     it "routes to #update via PUT" do
