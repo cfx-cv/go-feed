@@ -13,6 +13,9 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+
+    role = params[:role]
+    @role = role[0].capitalize + role[1..-1]
   end
 
   def edit
