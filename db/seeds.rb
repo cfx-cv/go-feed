@@ -23,7 +23,7 @@ restaurants.each do |restaurant|
   3.times do |i|
     Menu.create(
       name: restaurant.name.split[1] + " " + (65 + i).chr,
-      price: i*1000,
+      price: i * 1000,
       restaurant: restaurant
     )
   end
