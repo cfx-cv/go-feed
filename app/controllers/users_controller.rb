@@ -13,9 +13,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-
-    role = params[:role]
-    @role = role[0].capitalize + role[1..-1]
+    @role = params[:role]
   end
 
   def edit
@@ -61,6 +59,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.require(:user).permit(:username, :email, :role, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :role, :password, :password_confirmation)
     end
 end

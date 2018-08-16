@@ -15,8 +15,7 @@ class ApplicationController < ActionController::Base
     end
 
     def logged_in?
-      # !! current_user_session
-      true # FIXME
+      !!current_user_session
     end
 
     def require_login

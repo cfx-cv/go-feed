@@ -3,8 +3,8 @@ class Order < ApplicationRecord
   validates :status, inclusion: { in: statuses.keys }
 
   belongs_to :restaurant
-  belongs_to :customer
-  belongs_to :driver, optional: true
+  belongs_to :customer, class_name: "User"
+  belongs_to :driver, class_name: "User", optional: true
 
   has_many :order_menus
 
