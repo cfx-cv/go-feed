@@ -1,14 +1,17 @@
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
-    @menus = Menu.where(restaurant_id: params[:restaurant_id])
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @menus = Menu.where(restaurant: @restaurant)
   end
 
   def show
   end
 
   def new
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @menu = Menu.new
   end
 
@@ -54,7 +57,11 @@ class MenusController < ApplicationController
       @menu = Menu.find(params[:id])
     end
 
+    def set_restaurant
+      @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+
     def menu_params
-      params.fetch(:menu, {})
+      params.require(:menu).permit(:name, :price, :restaurant_id)
     end
 end

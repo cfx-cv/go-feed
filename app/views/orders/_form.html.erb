@@ -11,17 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.hidden_field :restaurant_id, value: restaurant.id %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :customer_id, value: 1 %> <!-- TODO -->
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :driver_id %>
-  </div>
+  <%= form.hidden_field :restaurant_id, value: restaurant.id %>
+  <%= form.hidden_field :customer_id, value: 1 %> <!-- TODO -->
+  <%= form.hidden_field :driver_id %>
 
   <% restaurant.menus.each do |menu| %>
     <div class="field">
