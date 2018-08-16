@@ -33,13 +33,22 @@ RSpec.describe MenusController, type: :controller do
     end
   end
 
-  # TODO
-  # describe "GET #new" do
-  #   it "returns a success response" do
-  #     get :new, params: { :restaurant_id => @restaurant }, session: valid_session
-  #     expect(response).to be_success
-  #   end
-  # end
+  describe "GET #new" do
+    let(:restaurant) {
+      Restaurant.create!(
+        name: "Warunk Nasgor",
+        address: "Test address",
+        description: "Test description",
+        phone: "0808080808",
+        position:  Position.new(latitude: 37.774929, longitude: -122.419418)
+      )
+    }
+
+    it "returns a success response" do
+      get :new, params: { restaurant_id: restaurant }, session: valid_session
+      expect(response).to be_success
+    end
+  end
 
   describe "GET #edit" do
     it "returns a success response" do
