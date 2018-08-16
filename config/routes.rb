@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :users
     
     get "/register", to: "users#new"
+    get "/register/driver", to: "users#new_driver"
 
     resource :user_sessions, only: [:new, :create, :destroy]
     get "/login", to: "user_sessions#new"

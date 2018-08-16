@@ -8,7 +8,7 @@ class UserSessionsController < ApplicationController
     def create
         @user_session = UserSession.new(user_session_params)
         if @user_session.save
-            redirect_to users_path
+            redirect_to restaurants_path
         else
             render :new
         end
