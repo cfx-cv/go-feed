@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
     # resources :users TODO
   end
+
+  root "static_pages#landing"
 end

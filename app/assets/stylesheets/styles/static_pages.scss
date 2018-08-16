@@ -1,0 +1,42 @@
+@import "../base/globals.scss";
+
+
+.landing-content {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: 
+    linear-gradient(
+      rgba(0,0,0,0.7),
+      rgba(0,0,0,0.7)
+    ),
+    url('https://images.unsplash.com/photo-1483732594212-58fdd5ef8f31?ixlib=rb-0.3.5&s=9198fe0d955c499a11851ac38f6806fc&auto=format&fit=crop&w=1050&q=80');
+  background-size: cover;
+  background-position: center;
+
+}
+
+.landing-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  @media only screen and (max-width: 400px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  gap: 1rem;
+  &-heading {
+    font-family: $logo-font;
+    font-weight: bold;
+    grid-column: 1 / 3;
+    @media only screen and (max-width: 390px) {
+      grid-column: 1 / 2;
+      font-size: 3rem;
+    }
+    margin: 0;
+    .fa {
+      margin-right: 1.5rem;
+    }
+  }
+}
