@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-#Simple authentication
+# Simple authentication
 gem 'authlogic', '~> 4.2.0'
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?

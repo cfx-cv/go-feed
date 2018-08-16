@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # get '/app', to: 'app#index'
-  scope '/app' do
+  # get "/app", to: "app#index"
+
+  scope "/app" do
     resources :restaurants do
       resources :menus
     end
@@ -9,12 +10,11 @@ Rails.application.routes.draw do
 
     resources :menus, :drivers
 
-    resources :users
-    
-    get "/register", to: "users#new"
-
-    resource :user_sessions, only: [:new, :create, :destroy]
+    resources :user_sessions, only: [:create]
     get "/login", to: "user_sessions#new"
     delete "/logout", to: "user_sessions#destroy"
+
+    resources :users, only: [:index, :show, :edit, :create, :update, :destroy]
+    get "/register", to: "users#new"
   end
 end
