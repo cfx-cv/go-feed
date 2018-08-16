@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_14_151824) do
+ActiveRecord::Schema.define(version: 2018_08_16_165035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "drivers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "menus", force: :cascade do |t|
     t.string "name"
@@ -36,11 +46,13 @@ ActiveRecord::Schema.define(version: 2018_08_14_151824) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "restaurant_id"
-    t.string "customer_id"
-    t.string "driver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+    t.bigint "customer_id"
+    t.bigint "driver_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["driver_id"], name: "index_orders_on_driver_id"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
   end
 
@@ -75,7 +87,7 @@ ActiveRecord::Schema.define(version: 2018_08_14_151824) do
     t.string "persistence_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role"
+    t.integer "role", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["persistence_token"], name: "index_users_on_persistence_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -85,5 +97,7 @@ ActiveRecord::Schema.define(version: 2018_08_14_151824) do
   add_foreign_key "order_menus", "menus"
   add_foreign_key "order_menus", "orders"
   add_foreign_key "orders", "restaurants"
+  add_foreign_key "orders", "users", column: "customer_id"
+  add_foreign_key "orders", "users", column: "driver_id"
   add_foreign_key "restaurants", "positions"
 end
