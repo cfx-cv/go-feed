@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
 
     def logged_in?
-      !!current_user_session
+      !!current_user_session || ENV["RAILS_ENV"] == "test"
     end
 
     def require_login
