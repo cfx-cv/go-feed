@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
+  before_action :require_logout, only: [:new, :create]
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -56,7 +58,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      defaults = { type: "Customer" }
-      params.require(:user).permit(:username, :email, :user_type, :password, :password_confirmation).reverse_merge(defaults)
+      params.require(:user).permit(:username, :email, :user_type, :password, :password_confirmation)
     end
 end
