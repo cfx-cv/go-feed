@@ -10,6 +10,14 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <%= form_with(url: logout_path, local: true, method: 'delete') do |form| %>
+        <div class="action">
+          <%= form.submit 'Logout' %>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
