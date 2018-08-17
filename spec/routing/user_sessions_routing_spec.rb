@@ -7,7 +7,7 @@ RSpec.describe UserSessionsController, type: :routing do
     end
 
     it "routes to #create" do
-      expect(post: "user_sessions").to route_to("user_sessions#create")
+      expect(post: "login").to route_to("user_sessions#create")
     end
 
     it "routes to #destroy" do
