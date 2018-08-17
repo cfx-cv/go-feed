@@ -10,17 +10,17 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="input-field">
     <%= form.label :username %>
     <%= form.text_field :username %>
   </div>
 
-  <div class="field">
+  <div class="input-field">
     <%= form.label :password %>
     <%= form.password_field :password %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Login" %>
+    <%= form.button "Login", type: :submit, class: "btn waves-effect waves-light red darken-2 white-text"  %>
   </div>
 <% end %>
