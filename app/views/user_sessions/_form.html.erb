@@ -1,18 +1,18 @@
 <%= form_with(model: user_session, url: login_post_path, local: true) do |form| %>
-  <% if user_session.errors.any? %>
-    <% user_session.errors.full_messages.each do |msg| %>
-      <small class="red-text"><%= msg %></small>
-    <% end %>
-  <% end %>
-
   <div class="input-field">
     <%= form.label :username %>
     <%= form.text_field :username %>
+    <% if user_session.errors[:username].any? %>
+      <small class="red-text"><%= user_session.errors.full_messages_for(:username).first %></small>
+    <% end %>
   </div>
 
   <div class="input-field">
     <%= form.label :password %>
     <%= form.password_field :password %>
+    <% if user_session.errors[:password].any? %>
+      <small class="red-text"><%= user_session.errors.full_messages_for(:password).first %></small>
+    <% end %>
   </div>
 
   <div class="actions">
