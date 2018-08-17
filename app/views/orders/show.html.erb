@@ -20,6 +20,20 @@
   <%= @order.status %>
 </p>
 
+<p>
+  <strong>Distance:</strong>
+  <%= @distance.text %>
+  <%= @distance.value %>
+</p>
+
+<p>
+  <strong>Duraton:</strong>
+  <%= @duration.text %>
+  <%= @duration.value %>
+</p>
+
+<img src="data:image/jpg;base64, <%= @staticmap %>" />
+
 <% if current_user.admin? %>
   <%= form_with(model: @order, local: true, method: 'patch') do |form| %>
     <%= form.hidden_field :driver_id, value: current_user.id %>

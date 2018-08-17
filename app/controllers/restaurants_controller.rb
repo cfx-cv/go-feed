@@ -8,7 +8,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @staticmap = @restaurant.fetch_map
+    @staticmap = @restaurant.fetch_staticmap
   end
 
   def new

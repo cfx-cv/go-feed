@@ -8,12 +8,12 @@ class Restaurant < ApplicationRecord
 
   has_many :menus
 
-  def fetch_map
-    params = { origin: "#{self.position.latitude},#{self.position.longitude}" }
-    url = "#{ENV["GATEWAY_URL"]}/staticmap?#{params.to_query}"
+  def fetch_staticmap
+    params = { origin: self.position.to_s }
 
+    url = "#{ENV["GATEWAY_URL"]}/staticmap?#{params.to_query}"
     resp = HTTP.get(url)
     json = JSON.parse(resp.to_s)
-    json["staticmap"]
+    json[:staticmap]
   end
 end

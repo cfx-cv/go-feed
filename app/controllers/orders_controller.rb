@@ -8,6 +8,11 @@ class OrdersController < ApplicationController
   end
 
   def show
+    distance_duration = @order.fetch_distance_duration
+    @distance = distance_duration[:distance]
+    @duration = distance_duration[:duration]
+
+    @staticmap = @order.fetch_staticmap
   end
 
   def create
@@ -63,7 +68,7 @@ class OrdersController < ApplicationController
     end
 
     def create_order_menus
-      order_params[:menus].each do |menu_id, quantity|
+      filtered_params[:menus].each do |menu_id, quantity|
         OrderMenu.create(order_id: @order.id, menu_id: menu_id, quantity: quantity)
       end
     end
