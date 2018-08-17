@@ -11,7 +11,7 @@ class Restaurant < ApplicationRecord
   def fetch_staticmap
     params = { origin: self.position.to_s }
 
-    url = "#{ENV["GATEWAY_URL"]}/staticmap?#{params.to_query}"
+    url = "#{ENV["GATEWAY_URI"]}/staticmap?#{params.to_query}"
     resp = HTTP.get(url)
     json = JSON.parse(resp.to_s)
     json["staticmap"]
