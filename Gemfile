@@ -25,6 +25,7 @@ gem "wdm", ">= 0.1.0" if Gem.win_platform?
 gem "authlogic", "~> 4.2.0"
 gem "http", "~> 3.3"
 gem "json", "~> 2.1"
+gem "geocoder", "~> 1.3"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

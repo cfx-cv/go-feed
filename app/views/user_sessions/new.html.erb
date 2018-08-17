@@ -2,6 +2,11 @@
   Log in
 <% end %>
 
+<%= render 'form', user_session: @user_session %>
+
+<%= link_to 'Register Admin', register_path('admin') %> |
+<%= link_to 'Register Customer', register_path('customer') %> |
+<%= link_to 'Register Driver', register_path('driver') %>
 <div class="login-content">
   <div class="login-container card hoverable">
     <div class="login-heading">

@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :require_admin, only: [:destroy]
+
   before_action :set_order, only: [:show, :update, :destroy]
 
   def index
@@ -6,10 +8,15 @@ class OrdersController < ApplicationController
   end
 
   def show
+    distance_duration = @order.fetch_distance_duration
+    @distance = distance_duration["distance"]
+    @duration = distance_duration["duration"]
+
+    @staticmap = @order.fetch_staticmap
   end
 
   def create
-    @order = Order.new(order_params.slice(:restaurant_id, :customer_id, :driver_id))
+    @order = Order.new(order_params.merge(order_destination: get_customer_position))
     create_order_menus if saved = @order.save
 
     respond_to do |format|
@@ -24,8 +31,8 @@ class OrdersController < ApplicationController
   end
 
   def update
-    updated = @order.update(order_params.slice(:restaurant_id, :customer_id, :driver_id))
-    @order.update_status if updated && order_params[:update_status]
+    updated = @order.update(order_params)
+    @order.update_status if updated && update_status?
 
     respond_to do |format|
       if updated
@@ -52,13 +59,28 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
     end
 
-    def order_params
+    def filtered_params
       params.require(:order).permit(:restaurant_id, :customer_id, :driver_id, :update_status, menus: {})
     end
 
+    def order_params
+      filtered_params.slice(:restaurant_id, :customer_id, :driver_id)
+    end
+
+    def get_customer_position
+      latitude, longitude = request.location.latitude, request.location.longitude
+      latitude, longitude = 0, 0 if latitude.nil? || longitude.nil?
+
+      Position.create(latitude: latitude, longitude: longitude)
+    end
+
     def create_order_menus
-      order_params[:menus].each do |menu_id, quantity|
+      filtered_params[:menus].each do |menu_id, quantity|
         OrderMenu.create(order_id: @order.id, menu_id: menu_id, quantity: quantity)
       end
+    end
+
+    def update_status?
+      order_params[:update_status]
     end
 end

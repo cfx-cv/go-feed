@@ -18,12 +18,8 @@ RSpec.describe User, type: :model do
   end
 
   describe "role" do
-    let(:roles) { %i(customer driver) }
+    let(:roles) { %i(admin customer driver) }
     let(:user) { User.new }
-
-    it "should have customer as default role" do
-      expect(user.role).to eq("customer")
-    end
 
     it "should be valid with certain role" do
       roles.each do |role|
