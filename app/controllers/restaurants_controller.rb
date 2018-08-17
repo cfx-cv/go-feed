@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  before_action :require_admin, only: [:new, :edit, :create, :update, :destroy]
+
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
   def index

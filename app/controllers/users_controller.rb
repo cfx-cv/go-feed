@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
   before_action :require_logout, only: [:new, :create]
+  before_action :require_admin, only: [:index]
 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -57,6 +58,7 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])
+      require_admin if @user != current_user
     end
 
     def user_params

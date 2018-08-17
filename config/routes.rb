@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :create, :update, :destroy]
-  get "/register/:role", to: "users#new"
+  get "/register/:role", to: "users#new", as: "register"
 
   resources :user_sessions, only: [:create]
   get "/login", to: "user_sessions#new"
@@ -13,5 +13,5 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:index, :show, :create, :update, :destroy]
   end
-  get "/app", to: "app#index"
+  get "/app", to: "restaurants#index", as: "index"
 end

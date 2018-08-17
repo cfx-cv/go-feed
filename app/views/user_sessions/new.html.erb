@@ -1,3 +1,7 @@
 <h1>Login</h1>
 
 <%= render 'form', user_session: @user_session %>
+
+<%= link_to 'Register Admin', register_path('admin') %> |
+<%= link_to 'Register Customer', register_path('customer') %> |
+<%= link_to 'Register Driver', register_path('driver') %>

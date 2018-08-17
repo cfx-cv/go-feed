@@ -1,9 +1,10 @@
 class MenusController < ApplicationController
+  before_action :require_admin, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
   before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @menus = Menu.where(restaurant: @restaurant)
   end
 
@@ -11,7 +12,6 @@ class MenusController < ApplicationController
   end
 
   def new
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @menu = Menu.new
   end
 

@@ -2,26 +2,33 @@
 
 <p>
   <strong>Restaurant:</strong>
-  <%= @order.restaurant %>
+  <%= @order.restaurant.name %>
 </p>
 
 <p>
   <strong>Customer:</strong>
-  <%= @order.customer %>
+  <%= @order.customer.username %>
 </p>
 
 <p>
   <strong>Driver:</strong>
-  <%= @order.driver %>
+  <%= @order.driver && @order.driver.username %>
 </p>
 
-<%= form_with(model: @order, local: true, method: 'patch') do |form| %>
-  <%= form.hidden_field :driver_id, value: @current_user.id %>
-  <%= form.hidden_field :update_status, value: true %>
+<p class="capitalized">
+  <strong>Status:</strong>
+  <%= @order.status %>
+</p>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<% if current_user.admin? %>
+  <%= form_with(model: @order, local: true, method: 'patch') do |form| %>
+    <%= form.hidden_field :driver_id, value: current_user.id %>
+    <%= form.hidden_field :update_status, value: true %>
+
+    <div class="actions">
+      <%= form.submit "Update Order Status" %>
+    </div>
+  <% end %>
 <% end %>
 
 <%= link_to 'Back', orders_path %>

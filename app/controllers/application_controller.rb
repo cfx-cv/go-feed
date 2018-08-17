@@ -19,10 +19,23 @@ class ApplicationController < ActionController::Base
     end
 
     def require_login
-      redirect_to login_path unless logged_in?
+      unless logged_in?
+        redirect_to login_path
+        flash[:notice] = "Login required."
+      end
     end
 
     def require_logout
-      redirect_to app_path if logged_in?
+      if logged_in?
+        redirect_to index_path
+        flash[:notice] = "Logout required."
+      end
+    end
+
+    def require_admin
+      unless current_user.admin?
+        redirect_to index_path
+        flash[:notice] = "Unauthorized access."
+      end
     end
 end

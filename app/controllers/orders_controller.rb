@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :require_admin, only: [:destroy]
+
   before_action :set_order, only: [:show, :update, :destroy]
 
   def index
