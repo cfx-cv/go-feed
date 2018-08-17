@@ -1,5 +1,17 @@
-<h1 class="capitalized">New <%= @role %></h1>
+<% content_for :title do %>
+  Register
+<% end %>
 
-<%= render partial: 'form', locals: { user: @user, role: @role } %>
-
-<%= link_to 'Back', login_path %>
+<div class="register-content">
+  <div class="register-container card hoverable">
+    <div class="register-heading">
+      <h2 class="register-heading-logo red-text text-darken-2">
+        <i class="fa fa-utensils"></i>GO-FEED
+      </h2>
+      <h4 class="register-heading-title">sign up as <%= @role %></h4>
+    </div>
+    <div class="register-form">
+      <%= render partial: 'form', locals: { user: @user, role: @role } %>
+    </div>
+  </div>
+</div>
