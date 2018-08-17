@@ -1,0 +1,18 @@
+<% content_for :title do %>
+  Welcome
+<% end %>
+
+<div class="landing-content">
+  <div class="landing-container">
+    <h1 class="landing-heading white-text">
+      <i class="fa fa-utensils"></i>GO-FEED
+    </h1>
+    <div class="landing-links-container">
+      <%= link_to "JOIN US!", register_path(:customer), class: "btn waves-effect waves-light red darken-2", id: "register-user" %>
+      <%= link_to "LOG IN", login_path, class: "btn waves-effect waves-red white red-text text-darken-2", id: "login" %>
+      <small class="white-text">or</small>
+      <%= link_to "Register as driver", register_path(:driver), class: "btn waves-effect waves-light grey darken-4 white-text", id:"register-driver" %>
+      <%= link_to "Register as restaurant", register_path(:restaurant), class: "btn waves-effect waves-light grey darken-4 white-text", id:"register-restaurant" %>
+    </div>
+  </div>
+</div>

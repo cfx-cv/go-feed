@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   get "/register/:role", to: "users#new", as: "register"
 
   resources :user_sessions, only: [:create]
-  get "/login", to: "user_sessions#new"
-  delete "/logout", to: "user_sessions#destroy"
+  get "/login", to: "user_sessions#new", as: "login"
+  delete "/logout", to: "user_sessions#destroy", as: "logout"
 
   scope "/app" do
     resources :restaurants do
@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:index, :show, :create, :update, :destroy]
   end
-  get "/app", to: "restaurants#index", as: "index"
+  get "/app", to: "app#index"
+
+  root "static_pages#landing"
 end

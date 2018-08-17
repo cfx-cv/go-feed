@@ -1,14 +1,23 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>Go-Feed</title>
+    <title>GO-FEED - <%= yield :title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Materialize CSS -->
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css" %>
+    <!-- Fontawesome CSS -->
+    <%= stylesheet_link_tag "https://use.fontawesome.com/releases/v5.2.0/css/all.css" %>
+    <!-- Google Fonts: Titillium Web -->
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Titillium+Web:400,700" %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :stylesheets %>
   </head>
-
   <body>
     <% if logged_in? %>
       <%= form_with(url: logout_path, local: true, method: 'delete') do |form| %>
@@ -19,5 +28,15 @@
     <% end %>
 
     <%= yield %>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery -->
+    <%= javascript_include_tag "https://code.jquery.com/jquery-3.3.1.slim.min.js" %>
+    <!-- Popper -->
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" %>
+    <!-- Materialize -->
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :scripts %>
   </body>
 </html>
