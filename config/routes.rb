@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :create, :update, :destroy]
   get "/register/:role", to: "users#new", as: "register"
 
-  resources :user_sessions, only: [:create]
   get "/login", to: "user_sessions#new", as: "login"
+  post "/login", to: "user_sessions#create", as: "login_post"
   delete "/logout", to: "user_sessions#destroy", as: "logout"
 
   scope "/app" do
