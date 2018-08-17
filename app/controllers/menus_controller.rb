@@ -53,6 +53,7 @@ class MenusController < ApplicationController
   end
 
   private
+
     def set_menu
       @menu = Menu.find(params[:id])
     end
