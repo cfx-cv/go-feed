@@ -47,6 +47,7 @@ class OrdersController < ApplicationController
   end
 
   private
+
     def set_order
       @order = Order.find(params[:id])
     end

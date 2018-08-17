@@ -16,7 +16,7 @@
 </p>
 
 <%= form_with(model: @order, local: true, method: 'patch') do |form| %>
-  <%= form.hidden_field :driver_id, value: 1 %> <!-- TODO -->
+  <%= form.hidden_field :driver_id, value: @current_user.id %>
   <%= form.hidden_field :update_status, value: true %>
 
   <div class="actions">

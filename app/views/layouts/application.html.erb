@@ -18,6 +18,14 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <% if logged_in? %>
+      <%= form_with(url: logout_path, local: true, method: 'delete') do |form| %>
+        <div class="action">
+          <%= form.submit 'Logout' %>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
     
     <!-- Optional JavaScript -->
