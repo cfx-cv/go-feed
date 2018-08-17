@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_165035) do
+ActiveRecord::Schema.define(version: 2018_08_17_065241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,10 @@ ActiveRecord::Schema.define(version: 2018_08_16_165035) do
     t.integer "status", default: 0
     t.bigint "customer_id"
     t.bigint "driver_id"
+    t.bigint "order_destination_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["driver_id"], name: "index_orders_on_driver_id"
+    t.index ["order_destination_id"], name: "index_orders_on_order_destination_id"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
   end
 
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 2018_08_16_165035) do
   add_foreign_key "menus", "restaurants"
   add_foreign_key "order_menus", "menus"
   add_foreign_key "order_menus", "orders"
+  add_foreign_key "orders", "positions", column: "order_destination_id"
   add_foreign_key "orders", "restaurants"
   add_foreign_key "orders", "users", column: "customer_id"
   add_foreign_key "orders", "users", column: "driver_id"

@@ -21,15 +21,18 @@
 </p>
 
 <p>
-  <strong>Distance:</strong>
-  <%= @distance.text %>
-  <%= @distance.value %>
+  <strong>Total price:</strong>
+  <%= @order.total_price %>
 </p>
 
 <p>
-  <strong>Duraton:</strong>
-  <%= @duration.text %>
-  <%= @duration.value %>
+  <strong>Distance:</strong>
+  <%= @distance["text"] %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @duration["text"] %>
 </p>
 
 <img src="data:image/jpg;base64, <%= @staticmap %>" />

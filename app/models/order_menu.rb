@@ -4,4 +4,8 @@ class OrderMenu < ApplicationRecord
 
   belongs_to :menu
   belongs_to :order
+
+  def price
+    self.menu.price
+  end
 end

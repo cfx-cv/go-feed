@@ -14,6 +14,6 @@ class Restaurant < ApplicationRecord
     url = "#{ENV["GATEWAY_URL"]}/staticmap?#{params.to_query}"
     resp = HTTP.get(url)
     json = JSON.parse(resp.to_s)
-    json[:staticmap]
+    json["staticmap"]
   end
 end

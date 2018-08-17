@@ -9,14 +9,14 @@ class OrdersController < ApplicationController
 
   def show
     distance_duration = @order.fetch_distance_duration
-    @distance = distance_duration[:distance]
-    @duration = distance_duration[:duration]
+    @distance = distance_duration["distance"]
+    @duration = distance_duration["duration"]
 
     @staticmap = @order.fetch_staticmap
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params.merge(order_destination: get_customer_position))
     create_order_menus if saved = @order.save
 
     respond_to do |format|
@@ -65,6 +65,13 @@ class OrdersController < ApplicationController
 
     def order_params
       filtered_params.slice(:restaurant_id, :customer_id, :driver_id)
+    end
+
+    def get_customer_position
+      latitude, longitude = request.location.latitude, request.location.longitude
+      latitude, longitude = 0, 0 if latitude.nil? || longitude.nil?
+
+      Position.create(latitude: latitude, longitude: longitude)
     end
 
     def create_order_menus
