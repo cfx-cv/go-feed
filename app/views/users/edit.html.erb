@@ -1,6 +1,6 @@
 <h1>Editing User</h1>
 
-<%= render 'form', user: @user %>
+<%= render partial: 'form', locals: { user: @user, role: @user.role } %>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>
