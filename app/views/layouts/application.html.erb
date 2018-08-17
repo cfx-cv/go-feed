@@ -16,6 +16,7 @@
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Titillium+Web:400,700" %>
     
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= yield :stylesheets %>
   </head>
   <body>
     <% if logged_in? %>
@@ -36,5 +37,6 @@
     <!-- Materialize -->
     <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :scripts %>
   </body>
 </html>
