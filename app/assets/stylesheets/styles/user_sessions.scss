@@ -68,7 +68,7 @@
   }
   &-form {
     padding-bottom: 1rem;
-    input[type=submit] {
+    button[type=submit] {
       margin-top: 1rem;
       @media only screen and (max-width: 450px) {
         width: 100%;
