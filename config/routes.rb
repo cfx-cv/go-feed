@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :user_sessions, only: [:create]
   get "/login", to: "user_sessions#new"
   delete "/logout", to: "user_sessions#destroy"
+  
+  get "/app", to: "app#index"
 
   scope "/app" do
     resources :restaurants do
@@ -13,5 +15,6 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:index, :show, :create, :update, :destroy]
   end
-  get "/app", to: "app#index"
+
+  root "static_pages#landing"
 end

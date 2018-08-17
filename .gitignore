@@ -26,6 +26,10 @@
 /public/assets
 .byebug_history
 
+/Vagrantfile
+/.vagrant
+ubuntu-*.log
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
