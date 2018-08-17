@@ -20,7 +20,6 @@ class MenusController < ApplicationController
 
   def create
     @menu = Menu.new(menu_params)
-
     respond_to do |format|
       if @menu.save
         format.html { redirect_to @menu, notice: "Menu was successfully created." }

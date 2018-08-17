@@ -15,27 +15,21 @@ class ApplicationController < ActionController::Base
     end
 
     def logged_in?
-      !!current_user_session || ENV["RAILS_ENV"] == "test"
+      !!current_user_session
     end
 
     def require_login
-      unless logged_in?
-        redirect_to login_path
-        flash[:notice] = "Login required."
-      end
+      redirect_to login_path unless logged_in?
     end
 
     def require_logout
-      if logged_in?
-        redirect_to index_path
-        flash[:notice] = "Logout required."
-      end
+      redirect_to index_path if logged_in?
     end
 
     def require_admin
       unless current_user.admin?
-        redirect_to index_path
         flash[:notice] = "Unauthorized access."
+        redirect_to index_path
       end
     end
 end

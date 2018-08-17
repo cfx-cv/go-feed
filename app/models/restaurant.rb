@@ -4,8 +4,9 @@ require "json"
 class Restaurant < ApplicationRecord
   validates :name, :address, presence: true
 
-  has_many :menus
   belongs_to :position
+
+  has_many :menus
 
   def fetch_map
     params = { origin: "#{self.position.latitude},#{self.position.longitude}" }

@@ -19,7 +19,8 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    position = Position.create(filtered_params.slice(:latitude, :longitude))
+    @restaurant = Restaurant.new(restaurant_params.merge(position: position))
 
     respond_to do |format|
       if @restaurant.save
@@ -33,6 +34,9 @@ class RestaurantsController < ApplicationController
   end
 
   def update
+    position = Position.new(filtered_params.slice(:latitude, :longitude))
+    restaurant_params = restaurant_params.merge(position: position) if position.save
+
     respond_to do |format|
       if @restaurant.update(restaurant_params)
         format.html { redirect_to @restaurant, notice: "Restaurant was successfully updated." }
@@ -58,7 +62,11 @@ class RestaurantsController < ApplicationController
       @restaurant = Restaurant.find(params[:id])
     end
 
+    def filtered_params
+      params.require(:restaurant).permit(:name, :address, :description, :phone, :latitude, :longitude)
+    end
+
     def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :description, :phone)
+      filtered_params.slice(:name, :address, :description, :phone)
     end
 end
