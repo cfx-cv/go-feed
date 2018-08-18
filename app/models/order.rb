@@ -13,6 +13,15 @@ class Order < ApplicationRecord
     self.order_menus.reduce(0) { |sum, menu| sum + (menu.price * menu.quantity) }
   end
 
+  def delivery_fee(distance)
+    minimum_fee = 7000.0
+
+    distance_in_km = distance["value"] / 1000.0
+    multiplier = 1500
+
+    [minimum_fee, distance_in_km * multiplier].max
+  end
+
   def fetch_distance_duration
     params = {
       origin: self.restaurant.position.to_s,
