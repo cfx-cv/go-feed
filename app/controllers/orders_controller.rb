@@ -21,6 +21,8 @@ class OrdersController < ApplicationController
   end
 
   def create
+    require_specific(@order.customer)
+
     @order = Order.new(order_params.merge(order_destination: get_customer_position))
     create_order_menus if saved = @order.save
 
@@ -36,6 +38,8 @@ class OrdersController < ApplicationController
   end
 
   def update
+    require_specific(@order.driver)
+    
     updated = @order.update(order_params)
     @order.update_status if updated && update_status? && update_status_allowed?
 

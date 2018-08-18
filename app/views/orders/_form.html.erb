@@ -1,4 +1,20 @@
 <%= form_with(model: order, local: true) do |form| %>
+  <table>
+    <% restaurant.menus.each do |menu| %>
+      <tr>
+        <td>
+          <div>
+            <span><%= menu.name %></span>
+            <% if current_user.admin? %>
+               | <%= link_to 'Edit', edit_menu_path(menu) %>
+              <%= link_to 'Delete', menu, method: :delete, data: {confirm: 'Are you sure?'} %>
+            <% end %>
+            <input class="order_menu_quantity" type="number" name="order[menus][<%= menu.id %>]" value="0" />
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </table>
   <% if order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
@@ -15,14 +31,5 @@
   <%= form.hidden_field :customer_id, value: current_user.id %>
   <%= form.hidden_field :driver_id %>
 
-  <% restaurant.menus.each do |menu| %>
-    <div class="field">
-      <span><%= menu.name %></span>
-      <input class="order_menu_quantity" type="number" name="order[menus][<%= menu.id %>]" value="0" />
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.button 'Submit', type: :submit, class: "btn red darken-2" %>
 <% end %>

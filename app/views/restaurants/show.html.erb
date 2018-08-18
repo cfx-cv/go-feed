@@ -1,30 +1,42 @@
-<p id="notice"><%= notice %></p>
-
-<img src="data:image/jpg;base64, <%= @staticmap %>" />
-
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @restaurant.description %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @restaurant.phone %>
-</p>
-
-<%= render partial: 'orders/form', locals: { order: Order.new, restaurant: @restaurant } %>
-
-<% if current_user.admin? %>
-  <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+<% content_for :dashboard_title do %>
+  Order from <%= @restaurant.name %>
 <% end %>
-<%= link_to 'Back', restaurants_path %>
+
+<% content_for :dashboard_header do %>
+  <%= render 'dashboard/header' %>
+<% end %>
+
+<% content_for :dashboard_sidebar do %>
+  <%= render 'dashboard/sidebar' %>
+<% end %>
+
+
+<% content_for :dashboard_content do %>
+  <section id="content">
+    <!--start container-->
+    <div class="container">
+      <div class="card-panel">
+        <div class="row">
+          <div class="col s12 m6">
+            <h4><%= @restaurant.name %></h4>
+            <p><%= @restaurant.address %> &bull; <%= @restaurant.phone ? @restaurant.phone : '-' %></p>
+            <p><%= @restaurant.description %></p>
+            <% if current_user.admin? %>
+              <%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "btn white red-text text-darken-2" %>
+              <%= link_to 'Delete', @restaurant, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn white red-text text-darken-2" %>
+            <% end %>
+          </div>
+          <div class="col s12 m6">
+            <img src="data:image/jpg;base64, <%= @staticmap %>" />
+          </div>
+        </div>
+        <div class="row">
+        </div>
+      </div>
+      <%= render partial: 'orders/form', locals: { order: Order.new, restaurant: @restaurant } %>
+    </div>
+    <!--end container-->
+  </section>
+<% end %>
+
+<%= render template: 'layouts/dashboard' %>
