@@ -70,29 +70,29 @@ end
 
 orders = Order.create([
   { 
-    customer: User.all[1],
+    customer: users[1],
     driver: nil,
     order_destination: Position.create(latitude: -6.244298, longitude: 106.800604),
     restaurant: Restaurant.all[0],
     status: 0
   },
   { 
-    customer: User.all[1],
-    driver: User.all[2],
+    customer: users[1],
+    driver: users[2],
     order_destination: Position.create(latitude: -6.244298, longitude: 106.800604),
     restaurant: Restaurant.all[1],
     status: 1
   },
   { 
-    customer: User.all[1],
-    driver: User.all[2],
+    customer: users[1],
+    driver: users[2],
     order_destination: Position.create(latitude: -6.244298, longitude: 106.800604),
     restaurant: Restaurant.all[2],
     status: 2
   },
   { 
-    customer: User.all[1],
-    driver: User.all[2],
+    customer: users[1],
+    driver: users[2],
     order_destination: Position.create(latitude: -6.244298, longitude: 106.800604),
     restaurant: Restaurant.all[0],
     status: 3
@@ -102,19 +102,23 @@ orders = Order.create([
 
 order_menus = OrderMenu.create([
   {
-    order: Order.all[0],
-    menu: Restaurant.all[0].menus[rand(1..3)]
+    order: orders[0],
+    menu: Restaurant.all[0].menus[rand(1..3)],
+    quantity: 1
   },
   {
-    order: Order.all[1],
-    menu: Restaurant.all[1].menus[rand(1..3)]
+    order: orders[1],
+    menu: Restaurant.all[1].menus[rand(1..3)],
+    quantity: 2
   },
   {
-    order: Order.all[2],
-    menu: Restaurant.all[2].menus[rand(1..3)]
+    order: orders[2],
+    menu: Restaurant.all[2].menus[rand(1..3)],
+    quantity: 3
   },
   {
-    order: Order.all[3],
-    menu: Restaurant.all[3].menus[rand(1..3)]
+    order: orders[3],
+    menu: Restaurant.all[3].menus[rand(1..3)],
+    quantity: 4
   }
 ])
