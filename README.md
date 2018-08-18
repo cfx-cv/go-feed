@@ -29,9 +29,9 @@ Using `docker`:
 
 ## Authors
 
-* **Devin Alvaro** - [devinalvaro](https://github.com/PurpleBooth)
-* **Laurentius Dominick Logan** - [Log-baseE](https://github.com/PurpleBooth)
-* **Maxalmina Satria Kahfi** - [Maxalmina](https://github.com/PurpleBooth)
+* **Devin Alvaro** - [devinalvaro](https://github.com/devinalvaro)
+* **Laurentius Dominick Logan** - [Log-baseE](https://github.com/Log-baseE)
+* **Maxalmina Satria Kahfi** - [Maxalmina](https://github.com/Maxalmina)
 * **Jonathan Christopher Jakub** - [Jonathanjojo19](https://github.com/Jonathanjojo19)
 
 
