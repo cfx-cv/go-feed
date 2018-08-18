@@ -16,40 +16,98 @@
   <section id="content">
     <!--start container-->
     <div class="container">
-      <h1>Orders</h1>
-      <table>
-        <thead>
+      <% if current_user.customer? %>
+        <h3>MY ORDERS</h3>
+      <% elsif current_user.driver? %>
+        <h3>ORDER QUEUE</h3>
+      <% else current_user.admin? %>
+        <h3>Orders</h3>
+      <% end %>
+
+      <% if current_user.admin? %>
+        <table>
           <tr>
             <th>Date</th>
-            <% if current_user.driver? || current_user.admin? %>
             <th>Customer</th>
-            <% end %>
             <th>Restaurant</th>
-            <% if current_user.driver? || current_user.admin? %>
             <th>Driver</th>
-            <% end %>
             <th>Status</th>
-            <th colspan="3"></th>
+            <th>Action</th>
           </tr>
-        </thead>
-
-        <tbody>
           <% @orders.each do |order| %>
-            <% if order.owned?(current_user) || (current_user.driver? && order.available?) || current_user.admin? %>
+            <% if order.owned?(current_user) || (current_user.driver? && @order.available?) || current_user.admin? %>
               <tr>
-                <td><%= order.created_at %></td>
-                <td><%= order.restaurant.name %></td>
+                <td><%= order.created_at.strftime("%d %b %Y, %H:%M") %></td>
                 <td><%= order.customer.username %></td>
+                <td><%= order.restaurant.name %></td>
                 <td><%= order.driver && order.driver.username %></td>
-                <td class="capitalized"><%= order.status %></td>
-                <td><%= link_to 'Show', order %></td>
-                <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } if current_user.admin? %></td>
+                <td><%= order.status %></td>
+                <td>
+                  <%= link_to(order, class: "white blue-text btn-small") do %>
+                    <i class="fa fa-info"></i>
+                  <% end %>
+                  <% if current_user.admin? %>
+                    <%= link_to(order, method: :delete, data: { confirm: 'Are you sure?' }, class: "white red-text btn-small") do %>
+                      <i class="fa fa-times"></i>
+                    <% end %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
+          <% end %>    
+        </table>  
+      <% elsif current_user.customer? %>
+        <% @orders.each do |order| %>
+          <% if order.owned?(current_user) %>
+            <div class="card">
+              <div class="card-content">
+                <small><%= order.created_at.strftime("%d %b %Y, %H:%M") %></small>
+                <h4><%= order.restaurant.name %></h4>
+                <p><%= order.restaurant.address %></p>
+                <small>Delivered by: <%= order.driver ? order.driver.username : "-" %></small>
+                <% if order.status == "available" %>
+                  <span class="btn-small white grey-text" style="position: absolute; right: 24px; top: 24px;">PENDING</span>
+                <% elsif order.status == "pending" %>
+                  <span class="btn-small white amber-text text-darken-2" style="position: absolute; right: 24px; top: 24px;">AWAITING ORDER</span>
+                <% elsif order.status == "ordered" %>
+                  <span class="btn-small amber white-text darken-2" style="position: absolute; right: 24px; top: 24px;">ORDERED</span>
+                <% elsif order.status == "completed" %>
+                  <span class="btn-small green white-text" style="position: absolute; right: 24px; top: 24px;">COMPLETE</span>
+                <% end %>
+              </div>
+              <div class="card-action">
+                <%= link_to 'Details', order, class: "blue-text" %>
+              </div>
+            </div>
           <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      <% elsif current_user.driver? %>
+        <% @orders.each do |order| %>
+          <% if order.owned?(current_user) || order.available? %>
+            <div class="card">
+              <div class="card-content">
+                <small><%= order.created_at.strftime("%d %b %Y, %H:%M") %></small>
+                <h4><%= order.restaurant.name %></h4>
+                <p><%= order.restaurant.address %></p>
+                <p>To: <%= order.order_destination %></p>
+                <small>Ordered by: <%= order.customer.username %></small>
+                <% if order.status == "available" %>
+                  <span class="btn-small white grey-text" style="position: absolute; right: 24px; top: 24px;">PENDING</span>
+                <% elsif order.status == "pending" %>
+                  <span class="btn-small white amber-text text-darken-2" style="position: absolute; right: 24px; top: 24px;">AWAITING ORDER</span>
+                <% elsif order.status == "ordered" %>
+                  <span class="btn-small amber white-text darken-2" style="position: absolute; right: 24px; top: 24px;">ORDERED</span>
+                <% elsif order.status == "completed" %>
+                  <span class="btn-small green white-text" style="position: absolute; right: 24px; top: 24px;">COMPLETE</span>
+                <% end %>
+              </div>
+              <div class="card-action">
+                <%= link_to 'Details', order, class: "blue-text" %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
     <!--end container-->
   </section>
 <% end %>
