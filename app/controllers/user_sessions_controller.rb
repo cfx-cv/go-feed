@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(user_session_params)
 
     if @user_session.save
-      redirect_to index_path
+      redirect_to dashboard_path
     else
       render :new
     end

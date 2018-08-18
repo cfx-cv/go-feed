@@ -1,0 +1,37 @@
+<% content_for :title do %>
+  Dashboard 
+  <% if content_for?(:dashboard_title) %>
+    | <%= yield :dashboard_title %>
+  <% end %>
+<% end %>
+
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag "dashboard" %>
+  <%= yield :dashboard_stylesheets %>
+<% end %>
+
+<% content_for :content do %>
+<%= yield :dashboard_header %>
+
+<div id="main">
+  <!-- START WRAPPER -->
+  <div class="wrapper">
+    <!-- START SIDEBAR NAV-->
+    <%= yield :dashboard_sidebar %>
+    <!-- END LEFT SIDEBAR NAV-->
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <!-- START CONTENT -->
+    <%= yield :dashboard_content %>
+    <!-- END CONTENT -->
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+  </div>
+  <!-- END WRAPPER -->
+</div>
+<% end %>
+
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'dashboard' %>
+  <%= yield :dashboard_scripts %>
+<% end %>
+
+<%= render template: "layouts/application" %>

@@ -29,13 +29,13 @@ class ApplicationController < ActionController::Base
     end
 
     def require_logout
-      redirect_to index_path if logged_in?
+      redirect_to dashboard_path if logged_in?
     end
 
     def require_admin
       unless current_user.admin?
         flash[:notice] = "Unauthorized access."
-        redirect_to index_path
+        redirect_to dashboard_path
       end
     end
 end
