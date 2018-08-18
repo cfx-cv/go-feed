@@ -38,7 +38,7 @@
             <% if order.owned?(current_user) || (current_user.driver? && @order.available?) || current_user.admin? %>
               <tr>
                 <td><%= order.created_at.strftime("%d %b %Y, %H:%M") %></td>
-                <td><%= order.customer.username %></td>
+                <td><%= order.customer && order.customer.username %></td>
                 <td><%= order.restaurant.name %></td>
                 <td><%= order.driver && order.driver.username %></td>
                 <td><%= order.status %></td>
@@ -90,7 +90,7 @@
                 <h4><%= order.restaurant.name %></h4>
                 <p><%= order.restaurant.address %></p>
                 <p>To: <%= order.order_destination %></p>
-                <small>Ordered by: <%= order.customer.username %></small>
+                <small>Ordered by: <%= order.customer && order.customer.username %></small>
                 <% if order.status == "available" %>
                   <span class="btn-small white grey-text" style="position: absolute; right: 24px; top: 24px;">PENDING</span>
                 <% elsif order.status == "pending" %>
