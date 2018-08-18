@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
 
   def show
     require_specific(@order.customer) if current_user.customer?
-    require_specific(@order.driver) if current_user.driver?
+    require_specific(@order.driver) if current_user.driver? && !@order.available?
 
     distance_duration = @order.fetch_distance_duration
     @distance = distance_duration["distance"]
