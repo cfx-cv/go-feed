@@ -15,14 +15,16 @@
 
   <tbody>
     <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.restaurant.name %></td>
-        <td><%= order.customer.username %></td>
-        <td><%= order.driver && order.driver.username %></td>
-        <td class="capitalized"><%= order.status %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } if current_user.admin? %></td>
-      </tr>
+      <% if @order.owned? || (current_user.driver? && @order.available?) %>
+        <tr>
+          <td><%= order.restaurant.name %></td>
+          <td><%= order.customer.username %></td>
+          <td><%= order.driver && order.driver.username %></td>
+          <td class="capitalized"><%= order.status %></td>
+          <td><%= link_to 'Show', order %></td>
+          <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } if current_user.admin? %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
