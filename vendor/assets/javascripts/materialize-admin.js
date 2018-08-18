@@ -1,1 +1,1 @@
-//= require_directory .
+//= require_directory ./materialize-admin
