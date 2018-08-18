@@ -10,6 +10,9 @@ class OrdersController < ApplicationController
   end
 
   def show
+    require_specific(@order.customer) if current_user.customer?
+    require_specific(@order.driver) if current_user.driver?
+
     distance_duration = @order.fetch_distance_duration
     @distance = distance_duration["distance"]
     @duration = distance_duration["duration"]
@@ -34,7 +37,7 @@ class OrdersController < ApplicationController
 
   def update
     updated = @order.update(order_params)
-    @order.update_status if updated && update_status?
+    @order.update_status if updated && update_status? && update_status_allowed?
 
     respond_to do |format|
       if updated
@@ -84,5 +87,9 @@ class OrdersController < ApplicationController
 
     def update_status?
       filtered_params[:update_status]
+    end
+
+    def update_status_allowed?
+      current_user.driver? && @order.owned?
     end
 end

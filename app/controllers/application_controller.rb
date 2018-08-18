@@ -52,4 +52,11 @@ class ApplicationController < ActionController::Base
         redirect_to dashboard_path
       end
     end
+
+    def require_specific(user)
+      unless current_user == user
+        flash[:notice] = "Unauthorized access."
+        redirect_to dashboard_path
+      end
+    end
 end

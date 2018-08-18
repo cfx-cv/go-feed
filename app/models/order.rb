@@ -57,4 +57,12 @@ class Order < ApplicationRecord
     status = Order.statuses[self.status] + 1
     self.update(status: status) if Order.statuses.has_value?(status)
   end
+
+  def available?
+    self.status == "available"
+  end
+
+  def owned?
+    self.customer == current_user || self.driver == current_user
+  end
 end
