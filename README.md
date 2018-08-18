@@ -1,8 +1,7 @@
-# GO-FEED
-
-[![CircleCI](https://circleci.com/gh/cfx-cv/go-feed.svg?style=svg)](https://circleci.com/gh/cfx-cv/go-feed)
+# GO-FEED [![CircleCI](https://circleci.com/gh/cfx-cv/go-feed.svg?style=svg)](https://circleci.com/gh/cfx-cv/go-feed)
 
 GO-FEED service for COMPFEST X Software Engineering Academy with GO-JEK
+
 
 ## Getting Started
 
@@ -15,7 +14,7 @@ Using `docker`:
 3. `docker-compose up`.
 4. `docker-compose exec web rails db:setup`.
 
-## Usage
+### Usage
 
 1. Visit `localhost`.
 
@@ -26,6 +25,17 @@ Using `docker`:
 * [Materialize](https://materializecss.com/)
 * [Docker](https://www.docker.com/)
 
+##### Microservices:
+
+* [Go](https://golang.org/)
+* [Redis](https://redis.io/)
+* [NATS](https://www.nats.io/)
+
+## Architecture
+<img src="img/arch.png" alt="architecture" width="800px"/>
+
+## Database Schema
+<img src="img/erb.png" alt="schema" width="500px"/>
 
 ## Authors
 
@@ -33,7 +43,6 @@ Using `docker`:
 * **Laurentius Dominick Logan** - [Log-baseE](https://github.com/Log-baseE)
 * **Maxalmina Satria Kahfi** - [Maxalmina](https://github.com/Maxalmina)
 * **Jonathan Christopher Jakub** - [Jonathanjojo19](https://github.com/Jonathanjojo19)
-
 
 ## Acknowledgments
 
