@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :update, :destroy]
 
   def index
-    @orders = Order.all
+    @orders = Order.order(:status)
   end
 
   def show

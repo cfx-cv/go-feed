@@ -1,4 +1,5 @@
 <% content_for :dashboard_title do %>
+  Restaurants
 <% end %>
 
 <% content_for :dashboard_header do %>
@@ -6,7 +7,7 @@
 <% end %>
 
 <% content_for :dashboard_sidebar do %>
-  <%= render partial: 'dashboard/sidebar', locals: {:restaurant => true} %>
+  <%= render 'dashboard/sidebar' %>
 <% end %>
 
 <% content_for :dashboard_content do %>
@@ -26,17 +27,6 @@
             </div>
           </div>
         </div>
-        <!--
-        <tr>
-          <td></td>
-          <td><%= restaurant.address %></td>
-          <td><%= restaurant.description %></td>
-          <td><%= restaurant.phone %></td>
-          <td><%= link_to 'Show', restaurant %></td>
-          <td><%= link_to 'Edit', edit_restaurant_path(restaurant) if current_user.admin? %></td>
-          <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } if current_user.admin? %></td>
-        </tr>
-        -->
       <% end %>
     </div>
     <!--end container-->

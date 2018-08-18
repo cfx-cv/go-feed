@@ -3,7 +3,7 @@
     <li class="no-padding">
       <ul class="collapsible expandable" data-collapsible="accordion">
         <li class="bold">
-          <a href="" class="waves-effect waves-light red darken-2 white-text">
+          <a href="" class="waves-effect red darken-2 white-text">
             <i class="fa fa-plus white-text"></i>
             <span class="nav-text">Order Food</span>
           </a>
@@ -20,12 +20,14 @@
             <span class="nav-text">Orders</span>
           </a>
         </li>
-        <li class="bold">
-          <a href="<%= users_path %>" class="waves-effect white red-text text-darken-2 <%= cp(users_path) %>">
-            <i class="fa fa-users red-text text-darken-2"></i>
-            <span class="nav-text">Users</span>
-          </a>
-        </li>
+        <% if current_user.admin? %>
+          <li class="bold">
+            <a href="<%= users_path %>" class="waves-effect white red-text text-darken-2 <%= cp(users_path) %>">
+              <i class="fa fa-users red-text text-darken-2"></i>
+              <span class="nav-text">Users</span>
+            </a>
+          </li>
+        <% end %>
       </ul>
     </li>
   </ul>
