@@ -19,7 +19,7 @@ class Order < ApplicationRecord
       destination: self.order_destination.to_s
     }
 
-    url = "#{ENV["GATEWAY_URL"]}/distance?#{params.to_query}"
+    url = "#{ENV["GATEWAY_URI"]}/distance?#{params.to_query}"
     resp = HTTP.get(url)
 
     fallback = {
@@ -43,7 +43,7 @@ class Order < ApplicationRecord
       destination: self.order_destination.to_s
     }
 
-    url = "#{ENV["GATEWAY_URL"]}/staticmap?#{params.to_query}"
+    url = "#{ENV["GATEWAY_URI"]}/staticmap?#{params.to_query}"
     resp = HTTP.get(url)
 
     fallback = ""

@@ -37,7 +37,7 @@
 
 <img src="data:image/jpg;base64, <%= @staticmap %>" />
 
-<% if current_user.admin? %>
+<% if current_user.driver? %>
   <%= form_with(model: @order, local: true, method: 'patch') do |form| %>
     <%= form.hidden_field :driver_id, value: current_user.id %>
     <%= form.hidden_field :update_status, value: true %>

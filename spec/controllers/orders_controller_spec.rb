@@ -1,9 +1,6 @@
 require "rails_helper"
 
 RSpec.describe OrdersController, type: :controller do
-  # This should return the minimal set of attributes required to create a valid
-  # Order. As you add validations to Order, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
   }
@@ -12,9 +9,6 @@ RSpec.describe OrdersController, type: :controller do
     skip("Add a hash of attributes invalid for your model")
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # OrdersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do

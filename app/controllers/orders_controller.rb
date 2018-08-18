@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :require_admin, only: [:destroy]
+  before_action :require_customer, only: [:new, :create]
+  before_action :require_driver, only: [:update]
 
   before_action :set_order, only: [:show, :update, :destroy]
 
@@ -81,6 +83,6 @@ class OrdersController < ApplicationController
     end
 
     def update_status?
-      order_params[:update_status]
+      filtered_params[:update_status]
     end
 end

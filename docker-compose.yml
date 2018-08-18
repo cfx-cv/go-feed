@@ -6,7 +6,7 @@ services:
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     environment:
       - DATABASE_HOST=${DATABASE_HOST}
-      - GATEWAY_URL=${GATEWAY_URL}
+      - GATEWAY_URI=${GATEWAY_URI}
       - RAILS_ENV=${RAILS_ENV}
     volumes:
       - .:/go-feed:z

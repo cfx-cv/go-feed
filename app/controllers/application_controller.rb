@@ -38,4 +38,18 @@ class ApplicationController < ActionController::Base
         redirect_to dashboard_path
       end
     end
+
+    def require_customer
+      unless current_user.customer?
+        flash[:notice] = "Unauthorized access."
+        redirect_to dashboard_path
+      end
+    end
+
+    def require_driver
+      unless current_user.driver?
+        flash[:notice] = "Unauthorized access."
+        redirect_to dashboard_path
+      end
+    end
 end
