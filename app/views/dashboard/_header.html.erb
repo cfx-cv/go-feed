@@ -8,7 +8,7 @@
             <h1 class="logo-wrapper">
               <a href="<%= %>" class="brand-logo darken-1">
                 <%= image_tag  "logo-white.svg", "alt-text": "go feed logo", class: "white-text" %>
-                <span class="logo-text hide-on-med-and-down heading logo-font">GO-FEED</span>
+                <span class="logo-text heading logo-font">GO-FEED</span>
               </a>
             </h1>
           </li>
@@ -55,15 +55,15 @@
             </ul>
           </li>
           <li>
-            <a href="{% url 'profile' %}" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown" title="Profile">
+            <a href="<%= profile_path %>" class="waves-effect waves-block waves-light profile-button" title="Profile">
               <span class="avatar-status avatar-online">
                 <%= image_tag "no-user.png" %>
                 <i></i>
               </span>
+              <span style="margin-left: 1rem">
+                Welcome, <%= current_user.username %>
+              </span>
             </a>
-          </li>
-          <li>
-            Welcome, <%= current_user.username %>
           </li>
           <li>
             <a href="<%= logout_path %>" class="waves-effect waves-block waves-light profile-button" title="Logout" id="logout" data-method="delete" rel="nofollow">

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
 
     resources :orders, only: [:index, :show, :create, :update, :destroy]
+
+    get "/profile", to: "dashboard#profile", as: "profile"
   end
 
   get "/app", to: "dashboard#index", as: "dashboard"
