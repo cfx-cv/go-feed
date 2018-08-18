@@ -1,6 +1,8 @@
 @import "base/globals.scss";
 
-@import "styles/menus.scss";
-@import "styles/orders.scss";
-@import "styles/restaurants.scss";
-@import "styles/static_pages.scss";
+@import "styles/*";
+
+.logo-font {
+  font-family: $logo-font;
+  font-weight: bold;
+}

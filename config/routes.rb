@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:index, :show, :create, :update, :destroy]
   end
-  get "/app", to: "restaurants#index", as: "dashboard"
+
+  get "/app", to: "dashboard#index", as: "dashboard"
 
   root "static_pages#landing"
 end

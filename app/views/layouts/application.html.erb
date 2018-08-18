@@ -17,27 +17,19 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= yield :stylesheets %>
-
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <% if logged_in? %>
-      <%= form_with(url: logout_path, local: true, method: 'delete') do |form| %>
-        <div class="action">
-          <%= form.submit 'Logout' %>
-        </div>
-      <% end %>
-    <% end %>
-
-    <%= yield %>
+    <%= content_for?(:content) ? yield(:content) : yield %>
 
     <!-- Optional JavaScript -->
     <!-- jQuery -->
-    <%= javascript_include_tag "https://code.jquery.com/jquery-3.3.1.slim.min.js" %>
+    <%= javascript_include_tag "https://code.jquery.com/jquery-3.3.1.min.js" %>
     <!-- Popper -->
     <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" %>
     <!-- Materialize -->
     <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js" %>
+
+    <%= javascript_include_tag 'application' %>
     <%= yield :scripts %>
   </body>
 </html>
