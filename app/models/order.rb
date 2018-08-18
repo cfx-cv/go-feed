@@ -62,7 +62,7 @@ class Order < ApplicationRecord
     self.status == "available"
   end
 
-  def owned?
+  def owned?(current_user)
     self.customer == current_user || self.driver == current_user
   end
 end

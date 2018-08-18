@@ -90,6 +90,6 @@ class OrdersController < ApplicationController
     end
 
     def update_status_allowed?
-      current_user.driver? && @order.owned?
+      current_user.driver? && @order.owned?(current_user)
     end
 end
