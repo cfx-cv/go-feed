@@ -1,10 +1,10 @@
-# GO-FEED
-
-[![CircleCI](https://circleci.com/gh/cfx-cv/go-feed.svg?style=svg)](https://circleci.com/gh/cfx-cv/go-feed)
+# GO-FEED [![CircleCI](https://circleci.com/gh/cfx-cv/go-feed.svg?style=svg)](https://circleci.com/gh/cfx-cv/go-feed)
 
 GO-FEED service for COMPFEST X Software Engineering Academy with GO-JEK
 
+
 ## Getting Started
+
 
 ### Installation
 
@@ -26,6 +26,12 @@ Using `docker`:
 * [Materialize](https://materializecss.com/)
 * [Docker](https://www.docker.com/)
 
+
+## Architecture
+![architecture](img/arch.png)
+
+## Database Schema
+![db-schema](img/erb.png)
 
 ## Authors
 
