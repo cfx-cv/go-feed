@@ -26,6 +26,10 @@ Using `docker`:
 * [Materialize](https://materializecss.com/)
 * [Docker](https://www.docker.com/)
 
+##### Microservices:
+* [Go](https://golang.org/)
+* [Redis](https://redis.io/)
+* [Nats](https://www.nats.io/)
 
 ## Architecture
 ![architecture](img/arch.png)
