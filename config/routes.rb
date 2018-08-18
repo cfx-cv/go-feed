@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
     get "/profile", to: "dashboard#profile", as: "profile"
   end
-  get "/app", to: "dashboard#index", as: "dashboard"
+  get "/app", to: "restaurants#index", as: "dashboard"
 
   root "static_pages#landing"
 end
