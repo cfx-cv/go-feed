@@ -17,39 +17,20 @@
     <!--start container-->
     <div class="container">
       <h1>Orders</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <% if current_user.driver? || current_user.admin? %>
-            <th>Customer</th>
-            <% end %>
-            <th>Restaurant</th>
-            <% if current_user.driver? || current_user.admin? %>
-            <th>Driver</th>
-            <% end %>
-            <th>Status</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @orders.each do |order| %>
-            <% if order.owned? || (current_user.driver? && @order.available?) || current_user.admin? %>
-              <tr>
-                <td><%= order.created_at %></td>
-                <td><%= order.restaurant.name %></td>
-                <td><%= order.customer.username %></td>
-                <td><%= order.driver && order.driver.username %></td>
-                <td class="capitalized"><%= order.status %></td>
-                <td><%= link_to 'Show', order %></td>
-                <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } if current_user.admin? %></td>
-              </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+      <% @orders.each do |order| %>
+        <% if order.owned? || (current_user.driver? && @order.available?) || current_user.admin? %>
+          <div class="card-panel">
+            <small><%= order.created_at.strftime("%d %b %Y, %H:%M") %></small>
+            <h4><%= order.restaurant.name %></h4>
+            <p><%= order.restaurant.address %></p>
+            <td><%= order.customer.username %></td>
+            <td><%= order.driver && order.driver.username %></td>
+            <td class="capitalized"><%= order.status %></td>
+            <td><%= link_to 'Show', order %></td>
+            <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } if current_user.admin? %></td>
+          </div>
+        <% end %>
+      <% end %>
     <!--end container-->
   </section>
 <% end %>
