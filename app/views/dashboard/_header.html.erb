@@ -63,7 +63,7 @@
             </a>
           </li>
           <li>
-            Welcome, {{ request.user.get_full_name }}
+            Welcome, <%= current_user.username %>
           </li>
           <li>
             <a href="<%= logout_path %>" class="waves-effect waves-block waves-light profile-button" title="Logout" id="logout" data-method="delete" rel="nofollow">
