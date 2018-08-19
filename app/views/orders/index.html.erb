@@ -92,7 +92,7 @@
                 <p>To: <%= order.order_destination %></p>
                 <small>Ordered by: <%= order.customer && order.customer.username %></small>
                 <% if order.status == "available" %>
-                  <span class="btn-small white grey-text" style="position: absolute; right: 24px; top: 24px;">PENDING</span>
+                  <span class="btn-small white green-text" style="position: absolute; right: 24px; top: 24px;">AVAILABLE</span>
                 <% elsif order.status == "pending" %>
                   <span class="btn-small white amber-text text-darken-2" style="position: absolute; right: 24px; top: 24px;">AWAITING ORDER</span>
                 <% elsif order.status == "ordered" %>
