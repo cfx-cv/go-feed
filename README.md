@@ -26,16 +26,10 @@ Using `docker`:
 * [Docker](https://www.docker.com/)
 
 ##### Microservices:
-<<<<<<< HEAD
-* [Go](https://golang.org/)
-* [Redis](https://redis.io/)
-* [Nats](https://www.nats.io/)
-=======
 
 * [Go](https://golang.org/)
 * [Redis](https://redis.io/)
 * [NATS](https://www.nats.io/)
->>>>>>> 9172030b29aee03246b51b0ad254e575032461b4
 
 ## Architecture
 <img src="img/arch.png" alt="architecture" width="800px"/>
