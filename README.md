@@ -5,7 +5,6 @@ GO-FEED service for COMPFEST X Software Engineering Academy with GO-JEK
 
 ## Getting Started
 
-
 ### Installation
 
 Using `docker`:
@@ -15,7 +14,7 @@ Using `docker`:
 3. `docker-compose up`.
 4. `docker-compose exec web rails db:setup`.
 
-## Usage
+### Usage
 
 1. Visit `localhost`.
 
@@ -27,15 +26,22 @@ Using `docker`:
 * [Docker](https://www.docker.com/)
 
 ##### Microservices:
+<<<<<<< HEAD
 * [Go](https://golang.org/)
 * [Redis](https://redis.io/)
 * [Nats](https://www.nats.io/)
+=======
+
+* [Go](https://golang.org/)
+* [Redis](https://redis.io/)
+* [NATS](https://www.nats.io/)
+>>>>>>> 9172030b29aee03246b51b0ad254e575032461b4
 
 ## Architecture
-![architecture](img/arch.png)
+<img src="img/arch.png" alt="architecture" width="800px"/>
 
 ## Database Schema
-![db-schema](img/erb.png)
+<img src="img/erb.png" alt="schema" width="500px"/>
 
 ## Authors
 
@@ -43,7 +49,6 @@ Using `docker`:
 * **Laurentius Dominick Logan** - [Log-baseE](https://github.com/Log-baseE)
 * **Maxalmina Satria Kahfi** - [Maxalmina](https://github.com/Maxalmina)
 * **Jonathan Christopher Jakub** - [Jonathanjojo19](https://github.com/Jonathanjojo19)
-
 
 ## Acknowledgments
 

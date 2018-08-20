@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :require_admin, only: [:destroy]
-  before_action :require_customer, only: [:new, :create]
+  before_action :require_customer, only: [:create]
   before_action :require_driver, only: [:update]
 
   before_action :set_order, only: [:show, :update, :destroy]
@@ -21,6 +21,9 @@ class OrdersController < ApplicationController
   end
 
   def create
+    customer = User.find(order_params[:customer_id])
+    require_specific(customer)
+
     @order = Order.new(order_params.merge(order_destination: get_customer_position))
     create_order_menus if saved = @order.save
 
@@ -36,7 +39,10 @@ class OrdersController < ApplicationController
   end
 
   def update
-    updated = @order.update(order_params)
+    driver = @order.driver || User.find(order_update_params[:driver_id])
+    require_specific(driver) if !@order.available?
+
+    updated = @order.update(order_update_params)
     @order.update_status if updated && update_status? && update_status_allowed?
 
     respond_to do |format|
@@ -70,6 +76,10 @@ class OrdersController < ApplicationController
 
     def order_params
       filtered_params.slice(:restaurant_id, :customer_id, :driver_id)
+    end
+
+    def order_update_params
+      order_params.slice(:driver_id)
     end
 
     def get_customer_position

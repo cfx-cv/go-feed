@@ -1,51 +1,85 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Restaurant:</strong>
-  <%= @order.restaurant.name %>
-</p>
-
-<p>
-  <strong>Customer:</strong>
-  <%= @order.customer.username %>
-</p>
-
-<p>
-  <strong>Driver:</strong>
-  <%= @order.driver && @order.driver.username %>
-</p>
-
-<p class="capitalized">
-  <strong>Status:</strong>
-  <%= @order.status %>
-</p>
-
-<p>
-  <strong>Total price:</strong>
-  <%= @order.total_price %>
-</p>
-
-<p>
-  <strong>Distance:</strong>
-  <%= @distance["text"] %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @duration["text"] %>
-</p>
-
-<img src="data:image/jpg;base64, <%= @staticmap %>" />
-
-<% if current_user.driver? %>
-  <%= form_with(model: @order, local: true, method: 'patch') do |form| %>
-    <%= form.hidden_field :driver_id, value: current_user.id %>
-    <%= form.hidden_field :update_status, value: true %>
-
-    <div class="actions">
-      <%= form.submit "Update Order Status" %>
-    </div>
-  <% end %>
+<% content_for :dashboard_title do %>
+  Order detail
 <% end %>
 
-<%= link_to 'Back', orders_path %>
+<% content_for :dashboard_header do %>
+  <%= render 'dashboard/header' %>
+<% end %>
+
+<% content_for :dashboard_sidebar do %>
+  <%= render 'dashboard/sidebar' %>
+<% end %>
+
+<% content_for :dashboard_content do %>
+  <section id="content">
+    <!--start container-->
+    <div class="container">
+      <p id="notice"><%= notice %></p>
+      <%= link_to 'Back', orders_path, class: "btn white red-text text-darken-2" %>
+
+      <p>
+        <strong>Restaurant:</strong>
+        <%= @order.restaurant.name %>
+      </p>
+
+      <p>
+        <strong>Customer:</strong>
+        <%= @order.customer.username %>
+      </p>
+
+      <p>
+        <strong>Driver:</strong>
+        <%= @order.driver && @order.driver.username %>
+      </p>
+
+      <p class="capitalized">
+        <strong>Status:</strong>
+        <%= @order.status %>
+      </p>
+      <table>
+        <tr>
+          <th>Menu</th>
+          <th>Price</th>
+        </tr>
+      <% @order.order_menus.menu do |menu| %>
+        <tr>
+          <td><%= menu.name %></td>
+          <td><%= menu.price %></td>
+        </tr>
+      <% end %>
+      </table>
+      <p>
+        <strong>Total price:</strong>
+        <%= @order.total_price %>
+      </p>
+
+      <p>
+        <strong>Distance:</strong>
+        <%= @distance["text"] %>
+      </p>
+
+      <p>
+        <strong>Duration:</strong>
+        <%= @duration["text"] %>
+      </p>
+
+      <% if current_user.driver? %>
+        <%= form_with(model: @order, local: true, method: 'patch') do |form| %>
+          <%= form.hidden_field :driver_id, value: current_user.id %>
+          <%= form.hidden_field :update_status, value: true %>
+
+          <div class="actions">
+            <%= form.button "Update Order Status", type: :submit, class: "btn white red-text text-darken-2", style: "margin-bottom: 1rem" %>
+          </div>
+        <% end %>
+      <% end %>
+
+
+      <img src="data:image/jpg;base64, <%= @staticmap %>" />
+
+    </div>
+    <!--end container-->
+  </section>
+<% end %>
+
+<%= render template: "layouts/dashboard" %>

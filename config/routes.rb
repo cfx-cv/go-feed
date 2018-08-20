@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :show, :edit, :update, :destroy]
   get "/register/:role", to: "users#new", as: "register"
   post "/register/:role", to: "users#create", as: "register_post"
 
@@ -14,10 +13,11 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:index, :show, :create, :update, :destroy]
 
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
+
     get "/profile", to: "dashboard#profile", as: "profile"
   end
-
-  get "/app", to: "dashboard#index", as: "dashboard"
+  get "/app", to: "restaurants#index", as: "dashboard"
 
   root "static_pages#landing"
 end
