@@ -18,6 +18,17 @@ Using `docker`:
 
 1. Visit `localhost`.
 
+## Architecture
+<img src="img/arch.png" alt="architecture" width="800px"/>
+
+## Microservices:
+
+* [Suez](https://github.com/cfx-cv/suez) - API gateway
+* [Dijkstra](https://github.com/cfx-cv/dijkstra) - Distance calculation-related
+* [Nami](https://github.com/cfx-cv/nami) - Route maps-related
+* [Herald](https://github.com/cfx-cv/herald) - Message broker using NATS
+* [Foible](https://github.com/cfx-cv/foible) - Error logs subscriber
+
 ## Built With
 
 * [Ruby on Rails](https://rubyonrails.org/)
@@ -30,9 +41,7 @@ Using `docker`:
 * [Go](https://golang.org/)
 * [Redis](https://redis.io/)
 * [NATS](https://www.nats.io/)
-
-## Architecture
-<img src="img/arch.png" alt="architecture" width="800px"/>
+* [Docker](https://www.docker.com/)
 
 ## Authors
 
