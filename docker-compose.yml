@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   web:
@@ -16,7 +16,7 @@ services:
       - db
     networks:
       default:
-      gofeed:
+      go-feed:
 
   db:
     image: postgres:10.5
@@ -30,5 +30,5 @@ volumes:
   postgres_volume:
 
 networks:
-  gofeed:
-    external: true
+  go-feed:
+    name: go-feed
