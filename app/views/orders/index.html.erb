@@ -54,8 +54,8 @@
                 </td>
               </tr>
             <% end %>
-          <% end %>    
-        </table>  
+          <% end %>
+        </table>
       <% elsif current_user.customer? %>
         <% @orders.each do |order| %>
           <% if order.owned?(current_user) %>

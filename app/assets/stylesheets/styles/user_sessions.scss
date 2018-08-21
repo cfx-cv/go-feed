@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: 
+    background:
     linear-gradient(
       rgba(0,0,0,0.7),
       rgba(0,0,0,0.7)
@@ -24,7 +24,7 @@
     width: 65%;
     max-width: 900px;
     @media only screen and (max-width: 1200px) {
-      width: 75%; 
+      width: 75%;
     }
     @media only screen and (max-width: 810px), (orientation: portrait) {
       grid-template-columns: repeat(1, 1fr);

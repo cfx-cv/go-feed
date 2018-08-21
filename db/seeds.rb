@@ -69,28 +69,28 @@ restaurants.each do |restaurant|
 end
 
 orders = Order.create([
-  { 
+  {
     customer: users[1],
     driver: nil,
     order_destination: Position.create(latitude: -6.244298, longitude: 106.800604),
     restaurant: Restaurant.all[0],
     status: 0
   },
-  { 
+  {
     customer: users[1],
     driver: users[2],
     order_destination: Position.create(latitude: -6.244298, longitude: 106.800604),
     restaurant: Restaurant.all[1],
     status: 1
   },
-  { 
+  {
     customer: users[1],
     driver: users[2],
     order_destination: Position.create(latitude: -6.244298, longitude: 106.800604),
     restaurant: Restaurant.all[2],
     status: 2
   },
-  { 
+  {
     customer: users[1],
     driver: users[2],
     order_destination: Position.create(latitude: -6.244298, longitude: 106.800604),
