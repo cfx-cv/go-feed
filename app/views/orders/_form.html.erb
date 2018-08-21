@@ -4,7 +4,7 @@
       <tr>
         <td>
           <div>
-            <span><%= menu.name %></span>
+            <span><%= menu.name %> (<%= menu.price %>)</span>
             <% if current_user.admin? %>
                | <%= link_to 'Edit', edit_menu_path(menu) %>
               <%= link_to 'Delete', menu, method: :delete, data: {confirm: 'Are you sure?'} %>
