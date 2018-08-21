@@ -34,9 +34,6 @@ Using `docker`:
 ## Architecture
 <img src="img/arch.png" alt="architecture" width="800px"/>
 
-## Database Schema
-<img src="img/erb.png" alt="schema" width="500px"/>
-
 ## Authors
 
 * **Devin Alvaro** - [devinalvaro](https://github.com/devinalvaro)
